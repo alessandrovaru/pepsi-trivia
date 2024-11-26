@@ -144,6 +144,18 @@ export default function LoginPage() {
           animation: ${step === 5 ? 'fadeIn' : 'fadeOut'} 0.5s forwards ;
         }
 
+        .step-6 {
+          animation: ${step === 6 ? 'fadeIn' : 'fadeOut'} 0.5s forwards ;
+        }
+
+        .step-7 {
+          animation: ${step === 7 ? 'fadeIn' : 'fadeOut'} 0.5s forwards ;
+        }
+
+        .step-8 {
+          animation: ${step === 8 ? 'fadeIn' : 'fadeOut'} 0.5s forwards ;
+        }
+
         main {
           position: relative;
           height: auto; /* Adjust based on content */

@@ -53,16 +53,16 @@ export async function signup(signUpData) {
     age: 24
   };
 
-  await addUserData(userData);
+  const { data: userDataResponse, error: userDataError } = await addUserData(userData);
 
   const firstUserAnswers = {
-    user_id: 14,
+    user_id: userDataResponse.id,
     question_id: 1, 
     answers: first_answers
   };
 
   const secondUserAnswers = {
-    user_id: 14,
+    user_id: userDataResponse.id,
     question_id: 2, 
     answers: second_answers
   };
@@ -91,6 +91,8 @@ const addUserData = async (userData) => {
   if (error) {
     console.error(error);
   }
+
+  return data;
 }
 
 const addUserAnswers = async (answers) => {
