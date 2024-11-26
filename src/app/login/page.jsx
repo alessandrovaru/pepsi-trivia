@@ -100,7 +100,7 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="flex items-center justify-center min-h-screen  p-8 font-[family-name:var(--font-pepsi-owners-2-compressed)] bg-gradient-to-br from-[#fff] to-[#000000]">
+    <div className="flex items-center justify-center min-h-screen  p-8 font-[family-name:var(--font-pepsi-owners-2-compressed)] bg-black">
       <style jsx>{`
         @keyframes fadeIn {
           from {
@@ -161,9 +161,15 @@ export default function LoginPage() {
           height: auto; /* Adjust based on content */
         }
       `}</style>
-      <main className="w-full max-w-md  p-8 rounded-lg relative overflow-hidden bg-black ">
-        
-        <form className="flex flex-col gap-6">
+      <main className="w-full max-w-mdp-8 rounded-lg relative overflow-hidden bg-black grid grid-row-1 gap-6 p-8">
+        <Image
+          src="/images/logo.png"
+          alt="Logo"
+          width={200}
+          height={200}
+          className="mx-auto h-20 w-20"
+        />
+        <form className="flex flex-col gap-6 p-8 bg-black bg-opacity-50 rounded-lg">
           {/* Step 1: Email Add or condition*/}
           {(step === 1 || step === 1.5) && (
             <div className={`step step-1`}>
@@ -182,13 +188,13 @@ export default function LoginPage() {
                   placeholder="Enter your email"
                 />
               </div>
-              <div className="flex flex-col sm:flex-row sm:justify-between gap-4">
+              <div className="flex flex-row justify-between gap-4 pt-4">
                 <button
                   type="button"
                   onClick={handleNext}
                   className="bg-[#0025ff] bg-opacity-80 text-white rounded-full py-2 px-4 hover:bg-blue-700 transition-colors"
                 >
-                  Next
+                  Siguiente
                 </button>
               </div>
             </div>
@@ -213,20 +219,20 @@ export default function LoginPage() {
                   placeholder="Enter your password"
                 />
               </div>
-              <div className="flex flex-col sm:flex-row sm:justify-between gap-4">
+              <div className="flex flex-row justify-between gap-4 pt-4">
                 <button
                   type="button"
                   onClick={() =>{ setStep(step - 0.5); setTimeout(() => {setStep(step - 1);}, 100);}}
                   className="bg-[#0025ff] bg-opacity-80 text-white rounded-full py-2 px-4 hover:bg-blue-700 transition-colors"
                 >
-                  Back
+                  Atrás
                 </button>
                 <button
                   type="button"
                   onClick={handleNext}
                   className="bg-[#0025ff] bg-opacity-80 text-white rounded-full py-2 px-4 hover:bg-blue-700 transition-colors"
                 >
-                  Next
+                  Siguiente
                 </button>
                 {/* <button
                   type="submit"
@@ -256,20 +262,21 @@ export default function LoginPage() {
                   placeholder="Enter your name"
                 />
               </div>
+              
+              <div className="flex flex-row justify-between gap-4 pt-4">
               <button
                   type="button"
                   onClick={() =>{ setStep(step - 0.5); setTimeout(() => {setStep(step - 1);}, 100);}}
                   className="bg-[#0025ff] bg-opacity-80 text-white rounded-full py-2 px-4 hover:bg-blue-700 transition-colors"
                 >
-                  Back
+                  Atrás
                 </button>
-              <div className="flex flex-col sm:flex-row sm:justify-between gap-4">
                 <button
                   type="button"
                   onClick={handleNext}
                   className="bg-[#0025ff] bg-opacity-80 text-white rounded-full py-2 px-4 hover:bg-blue-700 transition-colors"
                 >
-                  Next
+                  Siguiente
                 </button>
               </div>
             </div>
@@ -292,20 +299,21 @@ export default function LoginPage() {
                   placeholder="Enter your lastname"
                 />
               </div>
+              
+              <div className="flex flex-row justify-between gap-4 pt-4">
               <button
                   type="button"
                   onClick={() =>{ setStep(step - 0.5); setTimeout(() => {setStep(step - 1);}, 100);}}
                   className="bg-[#0025ff] bg-opacity-80 text-white rounded-full py-2 px-4 hover:bg-blue-700 transition-colors"
                 >
-                  Back
+                Atrás
                 </button>
-              <div className="flex flex-col sm:flex-row sm:justify-between gap-4">
                 <button
                   type="button"
                   onClick={handleNext}
                   className="bg-[#0025ff] bg-opacity-80 text-white rounded-full py-2 px-4 hover:bg-blue-700 transition-colors"
                 >
-                  Next
+                Siguiente
                 </button>
               </div>
             </div>
@@ -328,27 +336,21 @@ export default function LoginPage() {
                   placeholder="Enter your phone"
                 />
               </div>
+             
+              <div className="flex flex-row justify-between gap-4 pt-4">
               <button
                   type="button"
                   onClick={() =>{ setStep(step - 0.5); setTimeout(() => {setStep(step - 1);}, 100);}}
                   className="bg-[#0025ff] bg-opacity-80 text-white rounded-full py-2 px-4 hover:bg-blue-700 transition-colors"
                 >
-                  Back
+                Atrás
                 </button>
-              <div className="flex flex-col sm:flex-row sm:justify-between gap-4">
                 <button
                   type="button"
                   onClick={handleNext}
                   className="bg-[#0025ff] bg-opacity-80 text-white rounded-full py-2 px-4 hover:bg-blue-700 transition-colors"
                 >
-                  Next
-                </button>
-                <button
-                  type="submit"
-                  onClick={handleSignup}
-                  className="bg-[#0025ff] bg-opacity-80 text-white rounded-full py-2 px-4 hover:bg-blue-700 transition-colors"
-                >
-                  Login
+                Siguiente
                 </button>
               </div>
             </div>
@@ -358,70 +360,71 @@ export default function LoginPage() {
             <div className={`step step-6`}>
               <div className="flex flex-col">
                 <h2>Trivia</h2>
-                <button
-                    type="button"
-                    onClick={() =>{ setStep(step - 0.5); setTimeout(() => {setStep(step - 1);}, 100);}}
-                    className="bg-[#0025ff] bg-opacity-80 text-white rounded-full py-2 px-4 hover:bg-blue-700 transition-colors"
-                  >
-                    Back
-                </button>
-                <div className="flex flex-col sm:flex-row sm:justify-between gap-4">
+                <div className="flex flex-row justify-between gap-4 pt-4">
+                  <button
+                      type="button"
+                      onClick={() =>{ setStep(step - 0.5); setTimeout(() => {setStep(step - 1);}, 100);}}
+                      className="bg-[#0025ff] bg-opacity-80 text-white rounded-full py-2 px-4 hover:bg-blue-700 transition-colors"
+                    >
+                    Atrás
+                  </button>
                   <button
                     type="button"
                     onClick={handleNext}
                     className="bg-[#0025ff] bg-opacity-80 text-white rounded-full py-2 px-4 hover:bg-blue-700 transition-colors"
                   >
-                    Next
+                  Siguiente
                   </button>
                 </div>
               </div>
             </div>
           )}
 
-{(step === 7 || step === 7.5) && (
-  <div className={`step step-7`}>
-    <div className="flex flex-col">
-      <div className="flex flex-col">
-        {/* Add checkboxes with different options */}
-        {questions.find(q => q.id === 1).options.map((option, index) => (
-          <label key={index} className="text-white mb-2">
-            <input
-              type="checkbox"
-              name={`option-${index}`} // Unique name for each checkbox
-              value={option} // The value of the checkbox (e.g., the label text)
-              onChange={handleFirstAnswersChange} // Update state on change
-              className="mr-2"
-              checked={firstAnswers[`option-${index}`] || false} // Ensure it reflects the state (defaults to false if not checked)
-            />
-            {option} {/* Label text for the option */}
-          </label>
-        ))}
-        
-        <button
-          type="button"
-          onClick={() => {
-            setStep(step - 0.5);
-            setTimeout(() => { setStep(step - 1); }, 100);
-          }}
-          className="bg-[#0025ff] bg-opacity-80 text-white rounded-full py-2 px-4 hover:bg-blue-700 transition-colors"
-        >
-          Back
-        </button>
+          {(step === 7 || step === 7.5) && (
+            <div className={`step step-7`}>
+              <div className="flex flex-col">
+                <div className="flex flex-col">
+                  {/* Add checkboxes with different options */}
+                  {questions.find(q => q.id === 1).options.map((option, index) => (
+                    <label key={index} className="text-white mb-2">
+                      <input
+                        type="checkbox"
+                        name={`option-${index}`} // Unique name for each checkbox
+                        value={option} // The value of the checkbox (e.g., the label text)
+                        onChange={handleFirstAnswersChange} // Update state on change
+                        className="mr-2"
+                        checked={firstAnswers[`option-${index}`] || false} // Ensure it reflects the state (defaults to false if not checked)
+                      />
+                      {option} {/* Label text for the option */}
+                    </label>
+                  ))}
+                  
+                  
 
-        <div className="flex flex-col sm:flex-row sm:justify-between gap-4">
-          <button
-            type="button"
-            onClick={handleNext}
-            className="bg-[#0025ff] bg-opacity-80 text-white rounded-full py-2 px-4 hover:bg-blue-700 transition-colors"
-          >
-            Next
-          </button>
-          
-        </div>
-      </div>
-    </div>
-  </div>
-)}
+                  <div className="flex flex-row justify-between gap-4 pt-4">
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setStep(step - 0.5);
+                        setTimeout(() => { setStep(step - 1); }, 100);
+                      }}
+                      className="bg-[#0025ff] bg-opacity-80 text-white rounded-full py-2 px-4 hover:bg-blue-700 transition-colors"
+                    >
+                    Atrás
+                    </button>
+                    <button
+                      type="button"
+                      onClick={handleNext}
+                      className="bg-[#0025ff] bg-opacity-80 text-white rounded-full py-2 px-4 hover:bg-blue-700 transition-colors"
+                    >
+                    Siguiente
+                    </button>
+                    
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
 
           {(step === 8 || step === 8.5) && (
             <div className={`step step-8`}>
@@ -442,21 +445,16 @@ export default function LoginPage() {
                           {option}
                         </label>
                       ))}
+                      
+                      <div className="flex flex-row justify-between gap-4 pt-4">
                       <button
                           type="button"
                           onClick={() =>{ setStep(step - 0.5); setTimeout(() => {setStep(step - 1);}, 100);}}
                           className="bg-[#0025ff] bg-opacity-80 text-white rounded-full py-2 px-4 hover:bg-blue-700 transition-colors"
                         >
-                          Back
+                        Atrás
                       </button>
-                      <div className="flex flex-col sm:flex-row sm:justify-between gap-4">
-                        <button
-                          type="button"
-                          onClick={handleNext}
-                          className="bg-[#0025ff] bg-opacity-80 text-white rounded-full py-2 px-4 hover:bg-blue-700 transition-colors"
-                        >
-                          Next
-                        </button>
+                        
                         <button
                   type="submit"
                   onClick={handleSignup}
@@ -469,13 +467,6 @@ export default function LoginPage() {
               </div>
             </div>
           )}
-
-
-
-
-            {step}
-            {JSON.stringify(firstAnswers)}
-            {JSON.stringify(secondAnswers)}
           
           
         </form>
