@@ -1,14 +1,473 @@
-import { login, signup } from './actions'
+'use client'
+import { useState } from 'react';
+import Image from 'next/image';
+import { login, signup } from './actions';
 
 export default function LoginPage() {
+  const [step, setStep] = useState(1);
+  const [email, setEmail] = useState('');
+  const [name, setName] = useState('');
+  const [lastname, setLastname] = useState('');
+  const [phone, setPhone] = useState('');
+  const [password, setPassword] = useState('');
+  const [firstAnswers, setFirstAnswers] = useState({});
+  const [secondAnswers, setSecondAnswers] = useState({});
+  const questions = [
+    {
+      id: 1,
+      question: '¿Cuáles son los dos peloteros que llegan a la final?',
+      options: ['José Altuve', 'Eugenio Suárez', 'William contreras', 'Renato Nuñez', 'Andrés Chaparro', 'Jackson Chourio', 'Luisangel Acuña', 'Anthony Santander'],
+    },
+    {
+      id: 2,
+      question: '¿Quién queda campeón? ',
+      options: ['José Altuve', 'Eugenio Suárez', 'William contreras', 'Renato Nuñez', 'Andrés Chaparro', 'Jackson Chourio', 'Luisangel Acuña', 'Anthony Santander'],
+    }
+  ];
+
+  const handleNext = (e) => {
+    // make first 1,5 and then after 0,5 seconds make it 2
+    e.preventDefault();
+    if (email) {
+      setStep(step + 0.5);
+      setTimeout(() => {
+        setStep(step + 1);
+      }, 100);
+    }
+  };
+
+  // const handleLogin = (e) => {
+  //   e.preventDefault();
+  //   if (password) {
+  //     login({ email, password });
+  //   }
+  // };
+
+  const handleSignup = (e) => {
+    e.preventDefault();
+
+    const signUpData = {
+      email: email,
+      password: password,
+      name: name,
+      lastname: lastname,
+      phone: phone,
+      first_answers: JSON.stringify(firstAnswers),
+      second_answers: JSON.stringify(secondAnswers),
+    };
+    if (password) {
+      signup(signUpData);
+    }
+  }
+
+  const handleFirstAnswersChange = (e) => {
+    const { name, checked, value } = e.target;
+  
+    setFirstAnswers((prevAnswers) => {
+      if (checked) {
+        // Add the option to the state
+        return {
+          ...prevAnswers,
+          [name]: value,
+        };
+      } else {
+        // Remove the option from the state
+        const updatedAnswers = { ...prevAnswers };
+        delete updatedAnswers[name];
+        return updatedAnswers;
+      }
+    });
+  };
+  
+
+  const handleSecondAnswersChange = (e) => {
+    const { name, checked, value } = e.target;
+  
+    setSecondAnswers((prevAnswers) => {
+      if (checked) {
+        // Add the option to the state
+        return {
+          ...prevAnswers,
+          [name]: value,
+        };
+      } else {
+        // Remove the option from the state
+        const updatedAnswers = { ...prevAnswers };
+        delete updatedAnswers[name];
+        return updatedAnswers;
+      }
+    });
+  }
+
   return (
-    <form>
-      <label htmlFor="email">Email:</label>
-      <input id="email" name="email" type="email" required />
-      <label htmlFor="password">Password:</label>
-      <input id="password" name="password" type="password" required />
-      <button formAction={login}>Log in</button>
-      <button formAction={signup}>Sign up</button>
-    </form>
-  )
+    <div className="flex items-center justify-center min-h-screen  p-8 font-[family-name:var(--font-pepsi-owners-2-compressed)] bg-gradient-to-br from-[#fff] to-[#000000]">
+      <style jsx>{`
+        @keyframes fadeIn {
+          from {
+          opacity: 0;
+            transform: translateX(100%);
+          }
+          to {
+            opacity: 1;
+            transform: translateX(0);
+          }
+        }
+
+        @keyframes fadeOut {
+          from {
+            opacity: 1;
+            transform: translateX(0);
+          }
+          to {
+            opacity: 0;
+            transform: translateX(-100%);
+          }
+        }
+
+        .step-1 {
+          animation: ${step === 1 ? 'fadeIn' : 'fadeOut'} 0.5s forwards;
+        }
+
+        .step-2 {
+          animation: ${step === 2 ? 'fadeIn' : 'fadeOut'} 0.5s forwards ;
+        }
+
+        .step-3 {
+          animation: ${step === 3 ? 'fadeIn' : 'fadeOut'} 0.5s forwards ;
+        }
+
+        .step-4 {
+          animation: ${step === 4 ? 'fadeIn' : 'fadeOut'} 0.5s forwards ;
+        }
+
+        .step-5 {
+          animation: ${step === 5 ? 'fadeIn' : 'fadeOut'} 0.5s forwards ;
+        }
+
+        main {
+          position: relative;
+          height: auto; /* Adjust based on content */
+        }
+      `}</style>
+      <main className="w-full max-w-md  p-8 rounded-lg relative overflow-hidden bg-black ">
+        
+        <form className="flex flex-col gap-6">
+          {/* Step 1: Email Add or condition*/}
+          {(step === 1 || step === 1.5) && (
+            <div className={`step step-1`}>
+              <div className="flex flex-col">
+                <label htmlFor="email" className="text-white text-sm sm:text-base mb-1">
+                  Email:
+                </label>
+                <input
+                  id="email"
+                  name="email"
+                  type="email"
+                  required
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  className="px-4 py-2 rounded bg-white bg-opacity-20 text-white placeholder-white placeholder-opacity-50 border border-transparent focus:outline-none focus:ring-2 focus:ring-white"
+                  placeholder="Enter your email"
+                />
+              </div>
+              <div className="flex flex-col sm:flex-row sm:justify-between gap-4">
+                <button
+                  type="button"
+                  onClick={handleNext}
+                  className="bg-[#0025ff] bg-opacity-80 text-white rounded-full py-2 px-4 hover:bg-blue-700 transition-colors"
+                >
+                  Next
+                </button>
+              </div>
+            </div>
+          )}
+
+
+          {/* Step 2: Password */}
+          {(step === 2 || step === 2.5) && (
+            <div className={`step step-2`}>
+              <div className="flex flex-col">
+                <label htmlFor="password" className="text-white text-sm sm:text-base mb-1">
+                  Password:
+                </label>
+                <input
+                  id="password"
+                  name="password"
+                  type="password"
+                  required
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  className="px-4 py-2 rounded bg-white bg-opacity-20 text-white placeholder-white placeholder-opacity-50 border border-transparent focus:outline-none focus:ring-2 focus:ring-white"
+                  placeholder="Enter your password"
+                />
+              </div>
+              <div className="flex flex-col sm:flex-row sm:justify-between gap-4">
+                <button
+                  type="button"
+                  onClick={() =>{ setStep(step - 0.5); setTimeout(() => {setStep(step - 1);}, 100);}}
+                  className="bg-[#0025ff] bg-opacity-80 text-white rounded-full py-2 px-4 hover:bg-blue-700 transition-colors"
+                >
+                  Back
+                </button>
+                <button
+                  type="button"
+                  onClick={handleNext}
+                  className="bg-[#0025ff] bg-opacity-80 text-white rounded-full py-2 px-4 hover:bg-blue-700 transition-colors"
+                >
+                  Next
+                </button>
+                {/* <button
+                  type="submit"
+                  onClick={handleLogin}
+                  className="bg-[#0025ff] bg-opacity-80 text-white rounded-full py-2 px-4 hover:bg-blue-700 transition-colors"
+                >
+                  Login
+                </button> */}
+              </div>
+            </div>
+          )}
+
+          {(step === 3 || step === 3.5) && (
+            <div className={`step step-3`}>
+              <div className="flex flex-col">
+                <label htmlFor="name" className="text-white text-sm sm:text-base mb-1">
+                  Name:
+                </label>
+                <input
+                  id="name"
+                  name="name"
+                  type="text"
+                  required
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  className="px-4 py-2 rounded bg-white bg-opacity-20 text-white placeholder-white placeholder-opacity-50 border border-transparent focus:outline-none focus:ring-2 focus:ring-white"
+                  placeholder="Enter your name"
+                />
+              </div>
+              <button
+                  type="button"
+                  onClick={() =>{ setStep(step - 0.5); setTimeout(() => {setStep(step - 1);}, 100);}}
+                  className="bg-[#0025ff] bg-opacity-80 text-white rounded-full py-2 px-4 hover:bg-blue-700 transition-colors"
+                >
+                  Back
+                </button>
+              <div className="flex flex-col sm:flex-row sm:justify-between gap-4">
+                <button
+                  type="button"
+                  onClick={handleNext}
+                  className="bg-[#0025ff] bg-opacity-80 text-white rounded-full py-2 px-4 hover:bg-blue-700 transition-colors"
+                >
+                  Next
+                </button>
+              </div>
+            </div>
+          )}
+
+          {(step === 4 || step === 4.5) && (
+            <div className={`step step-4`}>
+              <div className="flex flex-col">
+                <label htmlFor="lastname" className="text-white text-sm sm:text-base mb-1">
+                  Lastname:
+                </label>
+                <input
+                  id="lastname"
+                  name="lastname"
+                  type="text"
+                  required
+                  value={lastname}
+                  onChange={(e) => setLastname(e.target.value)}
+                  className="px-4 py-2 rounded bg-white bg-opacity-20 text-white placeholder-white placeholder-opacity-50 border border-transparent focus:outline-none focus:ring-2 focus:ring-white"
+                  placeholder="Enter your lastname"
+                />
+              </div>
+              <button
+                  type="button"
+                  onClick={() =>{ setStep(step - 0.5); setTimeout(() => {setStep(step - 1);}, 100);}}
+                  className="bg-[#0025ff] bg-opacity-80 text-white rounded-full py-2 px-4 hover:bg-blue-700 transition-colors"
+                >
+                  Back
+                </button>
+              <div className="flex flex-col sm:flex-row sm:justify-between gap-4">
+                <button
+                  type="button"
+                  onClick={handleNext}
+                  className="bg-[#0025ff] bg-opacity-80 text-white rounded-full py-2 px-4 hover:bg-blue-700 transition-colors"
+                >
+                  Next
+                </button>
+              </div>
+            </div>
+          )}
+
+          {(step === 5 || step === 5.5) && (
+            <div className={`step step-5`}>
+              <div className="flex flex-col">
+                <label htmlFor="phone" className="text-white text-sm sm:text-base mb-1">
+                  Phone:
+                </label>
+                <input
+                  id="phone"
+                  name="phone"
+                  type="text"
+                  required
+                  value={phone}
+                  onChange={(e) => setPhone(e.target.value)}
+                  className="px-4 py-2 rounded bg-white bg-opacity-20 text-white placeholder-white placeholder-opacity-50 border border-transparent focus:outline-none focus:ring-2 focus:ring-white"
+                  placeholder="Enter your phone"
+                />
+              </div>
+              <button
+                  type="button"
+                  onClick={() =>{ setStep(step - 0.5); setTimeout(() => {setStep(step - 1);}, 100);}}
+                  className="bg-[#0025ff] bg-opacity-80 text-white rounded-full py-2 px-4 hover:bg-blue-700 transition-colors"
+                >
+                  Back
+                </button>
+              <div className="flex flex-col sm:flex-row sm:justify-between gap-4">
+                <button
+                  type="button"
+                  onClick={handleNext}
+                  className="bg-[#0025ff] bg-opacity-80 text-white rounded-full py-2 px-4 hover:bg-blue-700 transition-colors"
+                >
+                  Next
+                </button>
+                <button
+                  type="submit"
+                  onClick={handleSignup}
+                  className="bg-[#0025ff] bg-opacity-80 text-white rounded-full py-2 px-4 hover:bg-blue-700 transition-colors"
+                >
+                  Login
+                </button>
+              </div>
+            </div>
+          )}
+
+          {(step === 6  || step === 6.5) && (
+            <div className={`step step-6`}>
+              <div className="flex flex-col">
+                <h2>Trivia</h2>
+                <button
+                    type="button"
+                    onClick={() =>{ setStep(step - 0.5); setTimeout(() => {setStep(step - 1);}, 100);}}
+                    className="bg-[#0025ff] bg-opacity-80 text-white rounded-full py-2 px-4 hover:bg-blue-700 transition-colors"
+                  >
+                    Back
+                </button>
+                <div className="flex flex-col sm:flex-row sm:justify-between gap-4">
+                  <button
+                    type="button"
+                    onClick={handleNext}
+                    className="bg-[#0025ff] bg-opacity-80 text-white rounded-full py-2 px-4 hover:bg-blue-700 transition-colors"
+                  >
+                    Next
+                  </button>
+                </div>
+              </div>
+            </div>
+          )}
+
+{(step === 7 || step === 7.5) && (
+  <div className={`step step-7`}>
+    <div className="flex flex-col">
+      <div className="flex flex-col">
+        {/* Add checkboxes with different options */}
+        {questions.find(q => q.id === 1).options.map((option, index) => (
+          <label key={index} className="text-white mb-2">
+            <input
+              type="checkbox"
+              name={`option-${index}`} // Unique name for each checkbox
+              value={option} // The value of the checkbox (e.g., the label text)
+              onChange={handleFirstAnswersChange} // Update state on change
+              className="mr-2"
+              checked={firstAnswers[`option-${index}`] || false} // Ensure it reflects the state (defaults to false if not checked)
+            />
+            {option} {/* Label text for the option */}
+          </label>
+        ))}
+        
+        <button
+          type="button"
+          onClick={() => {
+            setStep(step - 0.5);
+            setTimeout(() => { setStep(step - 1); }, 100);
+          }}
+          className="bg-[#0025ff] bg-opacity-80 text-white rounded-full py-2 px-4 hover:bg-blue-700 transition-colors"
+        >
+          Back
+        </button>
+
+        <div className="flex flex-col sm:flex-row sm:justify-between gap-4">
+          <button
+            type="button"
+            onClick={handleNext}
+            className="bg-[#0025ff] bg-opacity-80 text-white rounded-full py-2 px-4 hover:bg-blue-700 transition-colors"
+          >
+            Next
+          </button>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+)}
+
+          {(step === 8 || step === 8.5) && (
+            <div className={`step step-8`}>
+              <div className="flex flex-col">
+                <div className="flex flex-col">
+                      {/* add check boxes with different options */}
+                      <h2>{questions.find(q => q.id === 2).question}</h2>
+                      {questions.find(q => q.id === 2).options.map((option, index) => (
+                        <label key={index} className="text-white mb-2">
+                          <input
+                            type="checkbox"
+                            name={`option-${index}`} // Unique name for each checkbox
+                            value={option} // The value of the checkbox (e.g., the label text)
+                            onChange={handleSecondAnswersChange} // Update state on change
+                            className="mr-2"
+                            checked={secondAnswers[`option-${index}`] || false} // Ensure it reflects the state (defaults to false if not checked)
+                          />
+                          {option}
+                        </label>
+                      ))}
+                      <button
+                          type="button"
+                          onClick={() =>{ setStep(step - 0.5); setTimeout(() => {setStep(step - 1);}, 100);}}
+                          className="bg-[#0025ff] bg-opacity-80 text-white rounded-full py-2 px-4 hover:bg-blue-700 transition-colors"
+                        >
+                          Back
+                      </button>
+                      <div className="flex flex-col sm:flex-row sm:justify-between gap-4">
+                        <button
+                          type="button"
+                          onClick={handleNext}
+                          className="bg-[#0025ff] bg-opacity-80 text-white rounded-full py-2 px-4 hover:bg-blue-700 transition-colors"
+                        >
+                          Next
+                        </button>
+                        <button
+                  type="submit"
+                  onClick={handleSignup}
+                  className="bg-[#0025ff] bg-opacity-80 text-white rounded-full py-2 px-4 hover:bg-blue-700 transition-colors"
+                >
+                  Login
+                </button>
+                      </div>
+                    </div>
+              </div>
+            </div>
+          )}
+
+
+
+
+            {step}
+            {JSON.stringify(firstAnswers)}
+            {JSON.stringify(secondAnswers)}
+          
+          
+        </form>
+      </main>
+    </div>
+  );
 }

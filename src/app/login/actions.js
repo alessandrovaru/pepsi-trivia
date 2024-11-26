@@ -28,22 +28,78 @@ export async function login(formData) {
 }
 
 
-export async function signup(formData) {
-  const supabase = await createClient()
+export async function signup(signUpData) {
+  const supabase = await createClient();
+  console.log(signUpData);
 
-  // type-casting here for convenience
-  // in practice, you should validate your inputs
-  const data = {
-    email: formData.get('email'),
-    password: formData.get('password'),
-  }
+  const { email, password, name, lastname, phone, first_answers, second_answers } = signUpData;
 
-  const { error } = await supabase.auth.signUp(data)
+  // Sign up the user
+  const { data: signUpResponse, error: signUpError } = await supabase.auth.signUp({
+    email: email,
+    password: password,
+  });
+
+  
+  
+
+
+  // Insert additional user data into 'users' table
+  const userData = {
+    name: name,
+    last_name: lastname,
+    phone_number: phone,
+    email: email,
+    age: 24
+  };
+
+  await addUserData(userData);
+
+  const firstUserAnswers = {
+    user_id: 14,
+    question_id: 1, 
+    answers: first_answers
+  };
+
+  const secondUserAnswers = {
+    user_id: 14,
+    question_id: 2, 
+    answers: second_answers
+  };
+
+  console.log(firstUserAnswers);
+  console.log(secondUserAnswers);
+
+  await addUserAnswers(firstUserAnswers);
+  await addUserAnswers(secondUserAnswers);
+
+
+
+  console.log(userData);
+
+  revalidatePath('/', 'layout');
+  redirect('/trivia');
+}
+
+const addUserData = async (userData) => {
+  const supabase = await createClient();
+  const { data, error } = await supabase.from('users').insert([userData]);
+
+  console.log(data);
+  
 
   if (error) {
-    redirect('/error')
+    console.error(error);
   }
+}
 
-  revalidatePath('/', 'layout')
-  redirect('/trivia')
+const addUserAnswers = async (answers) => {
+  const supabase = await createClient();
+  const { data, error } = await supabase.from('user_answers').insert([answers]);
+
+  console.log(data);
+
+  if (error) {
+    console.error(error);
+  }
 }
