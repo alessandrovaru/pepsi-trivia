@@ -56,13 +56,13 @@ export async function signup(signUpData) {
   const { data: userDataResponse, error: userDataError } = await addUserData(userData);
 
   const firstUserAnswers = {
-    user_id: userDataResponse.id,
+    user_id: userDataResponse[0].id,
     question_id: 1, 
     answers: first_answers
   };
 
   const secondUserAnswers = {
-    user_id: userDataResponse.id,
+    user_id: userDataResponse[0].id,
     question_id: 2, 
     answers: second_answers
   };
@@ -83,21 +83,21 @@ export async function signup(signUpData) {
 
 const addUserData = async (userData) => {
   const supabase = await createClient();
-  const { data, error } = await supabase.from('users').insert([userData]);
+  const { data, error } = await supabase.from('users').insert([userData]).select();
 
-  console.log(data);
+  console.log(data[0]);
   
 
   if (error) {
     console.error(error);
   }
 
-  return data;
+  return { data, error };
 }
 
 const addUserAnswers = async (answers) => {
   const supabase = await createClient();
-  const { data, error } = await supabase.from('user_answers').insert([answers]);
+  const { data, error } = await supabase.from('user_answers').insert([answers]).select();
 
   console.log(data);
 
