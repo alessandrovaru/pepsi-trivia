@@ -12,6 +12,8 @@ export default function LoginPage() {
   const [password, setPassword] = useState('');
   const [age, setAge] = useState('');
   const [firstAnswers, setFirstAnswers] = useState({});
+  const [firstAnswersString, setFirstAnswersString] = useState('');
+  const [secondAnswersString, setSecondAnswersString] = useState('');
   const [secondOptions, setSecondOptions] = useState({});
   const [secondAnswers, setSecondAnswers] = useState({});
   const [warning, setWarning] = useState('');
@@ -49,13 +51,15 @@ export default function LoginPage() {
   //   }
   // };
 
-  const handleSignup = (e) => {
+  const handleSignup = async (e) => {
     e.preventDefault();
-    setLoading(true);
-
+    if (!email || !name || !lastname || !phone || !age || Object.keys(firstAnswers).length !== 2 || Object.keys(secondAnswers).length !== 1) {
+      setWarning('Te faltan campos por llenar, por favor verifica');
+      return;
+    }
+  
     const signUpData = {
       email: email,
-      // password: Math.random().toString(36).slice(-8),
       password: '123456789',
       name: name,
       lastname: lastname,
@@ -64,14 +68,18 @@ export default function LoginPage() {
       first_answers: JSON.stringify(firstAnswers),
       second_answers: JSON.stringify(secondAnswers),
     };
-    if (email && name && lastname && phone && age && Object.keys(firstAnswers).length === 2 && Object.keys(secondAnswers).length === 1) {
-      signup(signUpData);
+  
+    const response = await signup(signUpData);
+    if (response.error) {
+      setWarning("Ya te registraste con estos datos. Pronto revelaremos a los ganadores"); 
+    } else {
+      setWarning('');
     }
-  }
+  };
 
   const handleFirstAnswersChange = (e) => {
     const { name, checked, value } = e.target;
-  
+
     setFirstAnswers((prevAnswers) => {
       if (checked && Object.keys(prevAnswers).length < 2) {
         // Add the option to the state
@@ -82,7 +90,6 @@ export default function LoginPage() {
       } else {
         // Remove the option from the state
         const updatedAnswers = { ...prevAnswers };
-      
         delete updatedAnswers[name];
         return updatedAnswers;
       }
@@ -185,6 +192,7 @@ export default function LoginPage() {
           className="mx-auto h-20 w-20"
         />
         <form className="flex flex-col gap-6 p-8 bg-black bg-opacity-50 rounded-lg">
+        {warning && <div className="text-red-500">{warning}</div>}
           {/* Step 1: Email Add or condition*/}
           {(step === 1 || step === 1.5) && (
             <div className={`step step-1`}>
@@ -199,7 +207,7 @@ export default function LoginPage() {
                   type="email"
                   required
                   value={email}
-                  onChange={(e) => setEmail(e.target.value)}
+                  onChange={(e) => {setEmail(e.target.value); setWarning('')}}
                   className="px-4 py-2 rounded bg-white bg-opacity-20 text-white placeholder-white placeholder-opacity-50 border border-transparent focus:outline-none focus:ring-2 focus:ring-white"
                   placeholder="Enter your email"
                 />
@@ -230,7 +238,7 @@ export default function LoginPage() {
                   type="number"
                   required
                   value={age}
-                  onChange={(e) => setAge(e.target.value)}
+                  onChange={(e) => {setAge(e.target.value); setWarning('')}}
                   className="px-4 py-2 rounded bg-white bg-opacity-20 text-white placeholder-white placeholder-opacity-50 border border-transparent focus:outline-none focus:ring-2 focus:ring-white"
                   placeholder="Pon tu edad"
                 />
@@ -310,7 +318,7 @@ export default function LoginPage() {
                   type="text"
                   required
                   value={lastname}
-                  onChange={(e) => setLastname(e.target.value)}
+                  onChange={(e) => {setLastname(e.target.value); setWarning('')}}
                   className="px-4 py-2 rounded bg-white bg-opacity-20 text-white placeholder-white placeholder-opacity-50 border border-transparent focus:outline-none focus:ring-2 focus:ring-white"
                   placeholder="Enter your lastname"
                 />
@@ -348,7 +356,7 @@ export default function LoginPage() {
                   type="text"
                   required
                   value={phone}
-                  onChange={(e) => setPhone(e.target.value)}
+                  onChange={(e) => {setPhone(e.target.value); setWarning('')}}
                   className="px-4 py-2 rounded bg-white bg-opacity-20 text-white placeholder-white placeholder-opacity-50 border border-transparent focus:outline-none focus:ring-2 focus:ring-white"
                   placeholder="Enter your phone"
                 />
@@ -491,8 +499,10 @@ export default function LoginPage() {
               </div>
             </div>
           )}
-          {JSON.stringify(firstAnswers)}
-          {JSON.stringify(secondAnswers)}
+          {/* {JSON.stringify(firstAnswers)}
+          {JSON.stringify(secondAnswers)} */}
+          {JSON.stringify(secondAnswersString)}
+          {JSON.stringify(firstAnswersString)}
           
           
         </form>
