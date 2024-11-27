@@ -498,13 +498,7 @@ export default function LoginPage() {
                     </div>
               </div>
             </div>
-          )}
-          {/* {JSON.stringify(firstAnswers)}
-          {JSON.stringify(secondAnswers)} */}
-          {JSON.stringify(secondAnswersString)}
-          {JSON.stringify(firstAnswersString)}
-          
-          
+          )}     
         </form>
       </main>
       }
