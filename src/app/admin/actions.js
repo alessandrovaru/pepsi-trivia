@@ -24,5 +24,5 @@ export async function login(formData) {
 
   // Revalida y redirige a la página principal después del login exitoso
   revalidatePath('/', 'layout');
-  redirect('/');
+  redirect('/winners');
 }
