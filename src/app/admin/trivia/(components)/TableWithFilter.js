@@ -62,6 +62,11 @@ export default function TableWithFilter({ data, error }) {
 
   console.log(JSON.stringify(displayedData));  
 
+  const generateRandomWinner = () => {
+    const winner = displayedData[Math.floor(Math.random() * displayedData.length)];
+    alert(`El ganador es el usuario con ID ${winner.user_id}`);
+  }
+
   return (
     <>
     {JSON.stringify(answer1Filter)}
@@ -126,6 +131,7 @@ export default function TableWithFilter({ data, error }) {
           )}
         </tbody>
       </table>
+      <button onClick={() => generateRandomWinner()}>Generar ganador</button>
     </>
   );
 }
