@@ -10,8 +10,14 @@ export default function LoginPage() {
   const [lastname, setLastname] = useState('');
   const [phone, setPhone] = useState('');
   const [password, setPassword] = useState('');
+  const [age, setAge] = useState('');
   const [firstAnswers, setFirstAnswers] = useState({});
+  const [secondOptions, setSecondOptions] = useState({});
   const [secondAnswers, setSecondAnswers] = useState({});
+  const [warning, setWarning] = useState('');
+  const [loading, setLoading] = useState(false);
+
+
   const questions = [
     {
       id: 1,
@@ -45,17 +51,20 @@ export default function LoginPage() {
 
   const handleSignup = (e) => {
     e.preventDefault();
+    setLoading(true);
 
     const signUpData = {
       email: email,
-      password: password,
+      // password: Math.random().toString(36).slice(-8),
+      password: '123456789',
       name: name,
       lastname: lastname,
       phone: phone,
+      age: age,
       first_answers: JSON.stringify(firstAnswers),
       second_answers: JSON.stringify(secondAnswers),
     };
-    if (password) {
+    if (email && name && lastname && phone && age && Object.keys(firstAnswers).length === 2 && Object.keys(secondAnswers).length === 1) {
       signup(signUpData);
     }
   }
@@ -64,7 +73,7 @@ export default function LoginPage() {
     const { name, checked, value } = e.target;
   
     setFirstAnswers((prevAnswers) => {
-      if (checked) {
+      if (checked && Object.keys(prevAnswers).length < 2) {
         // Add the option to the state
         return {
           ...prevAnswers,
@@ -73,6 +82,7 @@ export default function LoginPage() {
       } else {
         // Remove the option from the state
         const updatedAnswers = { ...prevAnswers };
+      
         delete updatedAnswers[name];
         return updatedAnswers;
       }
@@ -84,7 +94,7 @@ export default function LoginPage() {
     const { name, checked, value } = e.target;
   
     setSecondAnswers((prevAnswers) => {
-      if (checked) {
+      if (checked && Object.keys(prevAnswers).length < 1) {
         // Add the option to the state
         return {
           ...prevAnswers,
@@ -161,6 +171,11 @@ export default function LoginPage() {
           height: auto; /* Adjust based on content */
         }
       `}</style>
+      {loading ? (
+        <div className="fixed top-0 left-0 z-50 w-full h-full bg-black bg-opacity-70 flex items-center justify-center">
+          cargando
+        </div>
+      ) : 
       <main className="w-full max-w-mdp-8 rounded-lg relative overflow-hidden bg-black grid grid-row-1 gap-6 p-8">
         <Image
           src="/images/logo.png"
@@ -175,8 +190,9 @@ export default function LoginPage() {
             <div className={`step step-1`}>
               <div className="flex flex-col">
                 <label htmlFor="email" className="text-white text-sm sm:text-base mb-1">
-                  Email:
+                  Correo Electrónico:
                 </label>
+                <p className="text-white text-sm sm:text-base mb-1">Ingresa un correo electrónico válido, te contáctaremos si ganas.</p>
                 <input
                   id="email"
                   name="email"
@@ -201,22 +217,22 @@ export default function LoginPage() {
           )}
 
 
-          {/* Step 2: Password */}
+          {/* Step 2: Age */}
           {(step === 2 || step === 2.5) && (
             <div className={`step step-2`}>
               <div className="flex flex-col">
-                <label htmlFor="password" className="text-white text-sm sm:text-base mb-1">
-                  Password:
+                <label htmlFor="age" className="text-white text-sm sm:text-base mb-1">
+                  Edad:
                 </label>
                 <input
-                  id="password"
-                  name="password"
-                  type="password"
+                  id="age"
+                  name="age"
+                  type="number"
                   required
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
+                  value={age}
+                  onChange={(e) => setAge(e.target.value)}
                   className="px-4 py-2 rounded bg-white bg-opacity-20 text-white placeholder-white placeholder-opacity-50 border border-transparent focus:outline-none focus:ring-2 focus:ring-white"
-                  placeholder="Enter your password"
+                  placeholder="Pon tu edad"
                 />
               </div>
               <div className="flex flex-row justify-between gap-4 pt-4">
@@ -249,7 +265,7 @@ export default function LoginPage() {
             <div className={`step step-3`}>
               <div className="flex flex-col">
                 <label htmlFor="name" className="text-white text-sm sm:text-base mb-1">
-                  Name:
+                  Nombre:
                 </label>
                 <input
                   id="name"
@@ -286,7 +302,7 @@ export default function LoginPage() {
             <div className={`step step-4`}>
               <div className="flex flex-col">
                 <label htmlFor="lastname" className="text-white text-sm sm:text-base mb-1">
-                  Lastname:
+                  Apellido:
                 </label>
                 <input
                   id="lastname"
@@ -323,8 +339,9 @@ export default function LoginPage() {
             <div className={`step step-5`}>
               <div className="flex flex-col">
                 <label htmlFor="phone" className="text-white text-sm sm:text-base mb-1">
-                  Phone:
+                  Número de teléfono:
                 </label>
+                <p className="text-white text-sm sm:text-base mb-1">Ingresa un número de teléfono válido, te contáctaremos si ganas.</p>
                 <input
                   id="phone"
                   name="phone"
@@ -385,6 +402,8 @@ export default function LoginPage() {
               <div className="flex flex-col">
                 <div className="flex flex-col">
                   {/* Add checkboxes with different options */}
+                  <h2>{questions.find(q => q.id === 1).question}</h2>
+                  <p>Solo puedes seleccionar dos opciones</p>
                   {questions.find(q => q.id === 1).options.map((option, index) => (
                     <label key={index} className="text-white mb-2">
                       <input
@@ -412,13 +431,15 @@ export default function LoginPage() {
                     >
                     Atrás
                     </button>
-                    <button
-                      type="button"
-                      onClick={handleNext}
-                      className="bg-[#0025ff] bg-opacity-80 text-white rounded-full py-2 px-4 hover:bg-blue-700 transition-colors"
-                    >
-                    Siguiente
-                    </button>
+                    {Object.keys(firstAnswers).length === 2 && (
+                      <button
+                        type="button"
+                        onClick={handleNext}
+                        className="bg-[#0025ff] bg-opacity-80 text-white rounded-full py-2 px-4 hover:bg-blue-700 transition-colors"
+                      >
+                      Siguiente
+                      </button>
+                    )}
                     
                   </div>
                 </div>
@@ -432,45 +453,51 @@ export default function LoginPage() {
                 <div className="flex flex-col">
                       {/* add check boxes with different options */}
                       <h2>{questions.find(q => q.id === 2).question}</h2>
-                      {questions.find(q => q.id === 2).options.map((option, index) => (
-                        <label key={index} className="text-white mb-2">
-                          <input
-                            type="checkbox"
-                            name={`option-${index}`} // Unique name for each checkbox
-                            value={option} // The value of the checkbox (e.g., the label text)
-                            onChange={handleSecondAnswersChange} // Update state on change
-                            className="mr-2"
-                            checked={secondAnswers[`option-${index}`] || false} // Ensure it reflects the state (defaults to false if not checked)
-                          />
-                          {option}
-                        </label>
-                      ))}
+                      {Object.entries(firstAnswers).map(([key, value]) => (
+
+                           <label key={key} className="text-white mb-2">
+                            <input
+                              type="checkbox"
+                              name={key} // Unique name for each checkbox
+                              value={value} // The value of the checkbox (e.g., the label text)
+                              onChange={handleSecondAnswersChange} // Update state on change
+                              className="mr-2"
+                              checked={secondAnswers[key] || false} // Ensure it reflects the state (defaults to false if not checked)
+                            />
+                            {value} {/* Label text for the option */}
+                          </label>
+                        ))}
                       
                       <div className="flex flex-row justify-between gap-4 pt-4">
                       <button
                           type="button"
-                          onClick={() =>{ setStep(step - 0.5); setTimeout(() => {setStep(step - 1);}, 100);}}
+                          onClick={() =>{ setStep(step - 0.5); setTimeout(() => {setStep(step - 1);}, 100); setSecondAnswers({});}}
                           className="bg-[#0025ff] bg-opacity-80 text-white rounded-full py-2 px-4 hover:bg-blue-700 transition-colors"
                         >
                         Atrás
                       </button>
                         
-                        <button
-                  type="submit"
-                  onClick={handleSignup}
-                  className="bg-[#0025ff] bg-opacity-80 text-white rounded-full py-2 px-4 hover:bg-blue-700 transition-colors"
-                >
-                  Login
-                </button>
+                        {Object.keys(secondAnswers).length === 1 && (
+                          <button
+                            type="submit"
+                            onClick={handleSignup}
+                            className="bg-[#0025ff] bg-opacity-80 text-white rounded-full py-2 px-4 hover:bg-blue-700 transition-colors"
+                          >
+                            Registrarse
+                          </button>
+                        )}
                       </div>
                     </div>
               </div>
             </div>
           )}
+          {JSON.stringify(firstAnswers)}
+          {JSON.stringify(secondAnswers)}
           
           
         </form>
       </main>
+      }
     </div>
   );
 }
