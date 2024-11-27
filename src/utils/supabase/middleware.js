@@ -46,5 +46,19 @@ export async function updateSession(request) {
     return NextResponse.redirect(url)
   }
 
+  if (user && request.nextUrl.pathname.startsWith('/winners')) {
+    // User is logged in and trying to access admin page, looks for it comparing email with users table email in the database and then checks if the role is 'admin' else redirect to /trivia
+    const { data: users, error } = await supabase.from('users').select('*').eq('email', user.email)
+    if (error) {
+      console.error(error)
+    }
+    if (users[0].role !== 'admin') {
+      const url = request.nextUrl.clone()
+      url.pathname = '/trivia'
+      return NextResponse.redirect(url)
+    }
+  }
+
+
   return supabaseResponse
 }

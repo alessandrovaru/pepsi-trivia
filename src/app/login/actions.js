@@ -30,7 +30,6 @@ export async function login(formData) {
 
 export async function signup(signUpData) {
   const supabase = await createClient();
-  console.log(signUpData);
 
   const { email, password, name, lastname, phone, first_answers, second_answers } = signUpData;
 
@@ -67,15 +66,13 @@ export async function signup(signUpData) {
     answers: second_answers
   };
 
-  console.log(firstUserAnswers);
-  console.log(secondUserAnswers);
+
 
   await addUserAnswers(firstUserAnswers);
   await addUserAnswers(secondUserAnswers);
 
 
 
-  console.log(userData);
 
   revalidatePath('/', 'layout');
   redirect('/trivia');
@@ -85,7 +82,6 @@ const addUserData = async (userData) => {
   const supabase = await createClient();
   const { data, error } = await supabase.from('users').insert([userData]).select();
 
-  console.log(data[0]);
   
 
   if (error) {
@@ -99,7 +95,6 @@ const addUserAnswers = async (answers) => {
   const supabase = await createClient();
   const { data, error } = await supabase.from('user_answers').insert([answers]).select();
 
-  console.log(data);
 
   if (error) {
     console.error(error);

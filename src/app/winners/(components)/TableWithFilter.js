@@ -46,7 +46,6 @@ export default function TableWithFilter({ data, error }) {
     const matchesAnswer2 = selectedAnswers2.length > 0 
       ? answer2Filter === userAnswer.answers && userAnswer.question_id === 2
       : true;
-    console.log(matchesAnswer1, matchesAnswer2);
     return matchesAnswer1 || matchesAnswer2;
   });
 
@@ -56,11 +55,9 @@ export default function TableWithFilter({ data, error }) {
     userIdCount[userAnswer.user_id] = (userIdCount[userAnswer.user_id] || 0) + 1;
   });
 
-  console.log( userIdCount)
 
   const displayedData = filteredData.filter(userAnswer => userIdCount[userAnswer.user_id] >= 2);
 
-  console.log(JSON.stringify(displayedData));  
 
   const generateRandomWinner = () => {
     const winner = displayedData[Math.floor(Math.random() * displayedData.length)];
@@ -69,14 +66,12 @@ export default function TableWithFilter({ data, error }) {
 
   return (
     <>
-    {JSON.stringify(answer1Filter)}
-    {JSON.stringify(answer2Filter)}
       <div className="mb-4">
         <div className="mb-4">
           <span className="block mb-2 font-semibold">Filtrar por Respuesta de Pregunta 1:</span>
           <div className="flex flex-wrap">
             {optionsWithValues.map(option => (
-              <label key={`q1-${option.value}`} className="mr-4">
+              <label key={`q1-${option.value}`} className="mr-4 flex items-center">
                 <input
                   type="checkbox"
                   value={option.value}
@@ -93,7 +88,7 @@ export default function TableWithFilter({ data, error }) {
           <span className="block mb-2 font-semibold">Filtrar por Respuesta de Pregunta 2:</span>
           <div className="flex flex-wrap">
             {optionsWithValues.map(option => (
-              <label key={`q2-${option.value}`} className="mr-4">
+              <label key={`q2-${option.value}`} className="mr-4 flex items-center">
                 <input
                   type="checkbox"
                   value={option.value}
@@ -107,31 +102,31 @@ export default function TableWithFilter({ data, error }) {
           </div>
         </div>
       </div>
-      <table className="min-w-full bg-white text-black">
+      <table className="min-w-full bg-white text-black border border-gray-200">
         <thead>
           <tr>
-            <th className="py-2 px-4 border-b">Usuario ID</th>
-            <th className="py-2 px-4 border-b">Respuestas</th>
-            <th className="py-2 px-4 border-b">Id de pregunta</th>
+            <th className="py-2 px-4 border-b border-gray-200">Usuario ID</th>
+            <th className="py-2 px-4 border-b border-gray-200">Respuestas</th>
+            <th className="py-2 px-4 border-b border-gray-200">Id de pregunta</th>
           </tr>
         </thead>
         <tbody>
           {displayedData.length > 0 ? (
             displayedData.map((userAnswer) => (
-              <tr key={userAnswer.id}>
-                <td className="py-2 px-4 border-b">{userAnswer.user_id}</td>
-                <td className="py-2 px-4 border-b">{userAnswer.answers}</td>
-                <td className="py-2 px-4 border-b">{userAnswer.question_id}</td>
+              <tr key={userAnswer.id} className="hover:bg-gray-100">
+                <td className="py-2 px-4 border-b border-gray-200">{userAnswer.user_id}</td>
+                <td className="py-2 px-4 border-b border-gray-200">{userAnswer.answers}</td>
+                <td className="py-2 px-4 border-b border-gray-200">{userAnswer.question_id}</td>
               </tr>
             ))
           ) : (
             <tr>
-              <td className="py-2 px-4 border-b text-center" colSpan="3">No hay datos que mostrar</td>
+              <td className="py-2 px-4 border-b border-gray-200 text-center" colSpan="3">No hay datos que mostrar</td>
             </tr>
           )}
         </tbody>
       </table>
-      <button onClick={() => generateRandomWinner()}>Generar ganador</button>
-    </>
-  );
+      <button onClick={() => generateRandomWinner()} className="mt-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">Generar ganador</button>
+          </>
+        );
 }
