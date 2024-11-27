@@ -65,10 +65,10 @@ export default function TableWithFilter({ data, error }) {
   }
 
   return (
-    <>
-      <div className="mb-4">
+    <div className="flex flex-col items-center justify-center min-h-screen">
+      <div className="mb-4 font-[family-name:var(--font-pepsi-owners-2-compressed)] text-white" >
         <div className="mb-4">
-          <span className="block mb-2 font-semibold">Filtrar por Respuesta de Pregunta 1:</span>
+          <span className="block mb-2 font-semibold text-[3rem]">¿Quién llegó a la final?</span>
           <div className="flex flex-wrap">
             {optionsWithValues.map(option => (
               <label key={`q1-${option.value}`} className="mr-4 flex items-center">
@@ -85,7 +85,7 @@ export default function TableWithFilter({ data, error }) {
           </div>
         </div>
         <div className="mb-4">
-          <span className="block mb-2 font-semibold">Filtrar por Respuesta de Pregunta 2:</span>
+          <span className="block mb-2 font-semibold text-[3rem]">¿Quién ganó?</span>
           <div className="flex flex-wrap">
             {optionsWithValues.map(option => (
               <label key={`q2-${option.value}`} className="mr-4 flex items-center">
@@ -102,7 +102,7 @@ export default function TableWithFilter({ data, error }) {
           </div>
         </div>
       </div>
-      <table className="min-w-full bg-white text-black border border-gray-200">
+      <table className="bg-white text-black border border-gray-200">
         <thead>
           <tr>
             <th className="py-2 px-4 border-b border-gray-200">Usuario ID</th>
@@ -127,6 +127,6 @@ export default function TableWithFilter({ data, error }) {
         </tbody>
       </table>
       <button onClick={() => generateRandomWinner()} className="mt-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">Generar ganador</button>
-          </>
+          </div>
         );
 }
