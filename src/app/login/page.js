@@ -57,6 +57,8 @@ export default function LoginPage() {
       setWarning('Te faltan campos por llenar, por favor verifica');
       return;
     }
+
+    setLoading(true);
   
     const signUpData = {
       email: email,

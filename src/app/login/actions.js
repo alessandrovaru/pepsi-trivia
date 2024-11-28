@@ -52,8 +52,6 @@ export async function signup(signUpData) {
   const numbersString = numbersArraySorted.join('-');
   const numbersString2 = numbersArray2.join('');
 
-  console.log(numbersString);
-  console.log(numbersString2);
 
   // Sign up the user
   const { data: signUpResponse, error: signUpError } = await supabase.auth.signUp({
