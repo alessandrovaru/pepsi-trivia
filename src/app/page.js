@@ -31,6 +31,7 @@ export default async function Home() {
             height={130}
             className={styles.overlayImage}
           />
+          <h1 className={styles.title}>Toc para hacer la quiniela</h1>
         </Link>
       </div>
     </div>
