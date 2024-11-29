@@ -102,7 +102,7 @@ export default function TableWithFilter({ data, error }) {
           </div>
         </div>
       </div>
-      <table className="bg-white text-black border border-gray-200">
+      {/* <table className="bg-white text-black border border-gray-200">
         <thead>
           <tr>
             <th className="py-2 px-4 border-b border-gray-200">Usuario ID</th>
@@ -125,7 +125,12 @@ export default function TableWithFilter({ data, error }) {
             </tr>
           )}
         </tbody>
-      </table>
+      </table> */}
+
+      {/* add a text where it says how many entries we have, dont count the ones that have the same userid */}
+      <div className="text-white mt-4">
+        <p>{displayedData.length/7} entradas</p>
+      </div>
       <button onClick={() => generateRandomWinner()} className="mt-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">Generar ganador</button>
           </div>
         );
