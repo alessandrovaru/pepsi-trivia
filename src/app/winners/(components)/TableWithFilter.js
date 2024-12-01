@@ -73,11 +73,11 @@ export default function TableWithFilter({ data, error, getUser }) {
   }
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen">
+    <div className="flex flex-col items-center justify-center min-h-screen container mx-auto p-4 bg-black">
       <div className="mb-4 font-[family-name:var(--font-pepsi-owners-2-compressed)] text-white" >
         <div className="mb-4">
           <span className="block mb-2 font-semibold text-[3rem]">¿Quién llegó a la final?</span>
-          <span className="block mb-2 font-semibold text-sm">Tienes que elegir dos finalistas</span>
+          <span className="block mb-2 font-semibold text-sm underline">Tienes que elegir dos finalistas</span>
           <div className="flex flex-wrap flex-col">
             {optionsWithValues.map(option => (
               
@@ -96,6 +96,7 @@ export default function TableWithFilter({ data, error, getUser }) {
         </div>
         <div className="mb-4">
           <span className="block mb-2 font-semibold text-[3rem]">¿Quién ganó?</span>
+          <span className="block mb-2 font-semibold text-sm underline">Tienes que elegir un solo ganador</span>
           <div className="flex flex-wrap flex-col">
             {optionsWithValues.map(option => (
               <label key={`q2-${option.value}`} className="mr-4 flex items-center">
@@ -146,10 +147,10 @@ export default function TableWithFilter({ data, error, getUser }) {
         <div className="text-white mt-4 font-[family-name:var(--font-pepsi-owners-2-compressed)]">
           <p>El ganador es: {winner.name} {winner.last_name}</p>
           <p>Con el correo: {winner.email}</p>
-          <p> con  el phone: {winner.phone_number}</p>
+          <p> con  el número: {winner.phone_number}</p>
         </div>
       )}
-      <button onClick={() => generateRandomWinner()} className="mt-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">Generar ganador</button>
+      <button onClick={() => generateRandomWinner()} className="font-[family-name:var(--font-pepsi-owners-2-compressed)] mt-4 px-4 py-2 bg-blue-800 text-white rounded hover:bg-blue-900">Generar ganador</button>
           </div>
         );
 }

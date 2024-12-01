@@ -141,7 +141,7 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen  p-8 font-[family-name:var(--font-pepsi-owners-2-compressed)] bg-black">
+    <div className="flex items-center justify-center h-[96vh]  p-8 font-[family-name:var(--font-pepsi-owners-2-compressed)] bg-black">
       <style jsx>{`
         @keyframes fadeIn {
           from {

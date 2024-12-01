@@ -1,5 +1,6 @@
 import localFont from "next/font/local";
 import "./globals.css";
+import Footer from "@/components/Footer/Footer";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -30,6 +31,7 @@ const PepsiOwners2Regular = localFont({
   weight: "100 900",
 });
 
+
 export const metadata = {
   title: "Quiniela Pepsi - Festival de Jonrones 22",
   description: " ¡Participa en la quiniela de Pepsi y gana premios!",
@@ -39,9 +41,10 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body
-        className={`${PepsiOwners2Compressed.variable} antialiased`}
+        className={`${PepsiOwners2Compressed.variable} ${microgramma.variable} antialiased`}
       >
         {children}
+        <Footer />
       </body>
     </html>
   );

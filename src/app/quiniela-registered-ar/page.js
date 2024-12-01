@@ -20,7 +20,7 @@ export default function TriviaPage() {
   }, []);
 
   return (
-    <div className="flex items-center justify-center min-h-screen p-8 bg-black font-[family-name:var(--font-pepsi-owners-2-compressed)] relative">
+    <div className="flex items-center justify-center h-[96vh] p-8 bg-black font-[family-name:var(--font-pepsi-owners-2-compressed)] relative">
       <Image
         src={isMobile ? "/images/bg.png" : "/images/bg2.png"}
         alt="Background"

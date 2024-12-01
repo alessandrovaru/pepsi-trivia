@@ -15,7 +15,7 @@ export default async function Home() {
   const { data: { user } } = await supabase.auth.getUser()
 
   return (
-    <div className={`${styles.container} bg-black min-h-screen flex items-center justify-center flex-col p-4`}>
+    <div className={`${styles.container} bg-black flex items-center justify-center flex-col p-4 h-[96vh]`}>
       <div className={styles.overlay}>
         <Link href="/login">
           <Image
