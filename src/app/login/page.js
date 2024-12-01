@@ -2,6 +2,7 @@
 import { useState } from 'react';
 import Image from 'next/image';
 import { login, signup } from './actions';
+import { useRouter } from 'next/navigation';
 
 export default function LoginPage() {
   const [step, setStep] = useState(1);
@@ -18,6 +19,10 @@ export default function LoginPage() {
   const [secondAnswers, setSecondAnswers] = useState({});
   const [warning, setWarning] = useState('');
   const [loading, setLoading] = useState(false);
+
+
+  const router = useRouter();
+
 
 
   const questions = [
@@ -73,8 +78,13 @@ export default function LoginPage() {
   
     const response = await signup(signUpData);
     if (response.error) {
+      
+      setLoading(false);
+      router.push("/quiniela-registered-ar");
       setWarning("Ya te registraste con estos datos. Pronto revelaremos a los ganadores"); 
+      
     } else {
+      setLoading(false);
       setWarning('');
     }
   };

@@ -15,7 +15,7 @@ export default async function Home() {
   const { data: { user } } = await supabase.auth.getUser()
 
   return (
-    <div className={`${styles.container} bg-black min-h-screen flex items-center justify-center`}>      
+    <div className={`${styles.container} bg-black min-h-screen flex items-center justify-center flex-col p-4`}>
       <div className={styles.overlay}>
         <Link href="/login">
           <Image
@@ -31,9 +31,9 @@ export default async function Home() {
             height={130}
             className={styles.overlayImage}
           />
-          <h1 className={styles.title}>Toc para hacer la quiniela</h1>
         </Link>
       </div>
+      <h1 className={`${styles.title} font-[family-name:var(--font-pepsi-owners-2-compressed)] text-white font text-[3rem] text-center mt-12`} >TOCA PARA INICIAR LA QUINIELA</h1>
     </div>
   );
 }

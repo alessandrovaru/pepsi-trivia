@@ -32,7 +32,7 @@ export async function updateSession(request) {
     data: { user },
   } = await supabase.auth.getUser()
 
-  if (!user && !request.nextUrl.pathname.startsWith('/login') && !request.nextUrl.pathname.startsWith('/auth') && request.nextUrl.pathname !== '/') {
+  if (!user && !request.nextUrl.pathname.startsWith('/login') && !request.nextUrl.pathname.startsWith('/auth') && request.nextUrl.pathname !== '/' && !request.nextUrl.pathname.startsWith('/quiniela') ) {
     // No user, redirect to login page
     const url = request.nextUrl.clone()
     url.pathname = '/login'
@@ -42,7 +42,7 @@ export async function updateSession(request) {
   if (user && request.nextUrl.pathname.startsWith('/login')) {
     // User is logged in and trying to access login page, redirect to /trivia
     const url = request.nextUrl.clone()
-    url.pathname = '/trivia'
+    url.pathname = '/quiniela'
     return NextResponse.redirect(url)
   }
 
@@ -54,7 +54,7 @@ export async function updateSession(request) {
     }
     if (users[0].role !== 'admin') {
       const url = request.nextUrl.clone()
-      url.pathname = '/trivia'
+      url.pathname = '/quiniela'
       return NextResponse.redirect(url)
     }
   }

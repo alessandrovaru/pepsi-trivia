@@ -96,7 +96,7 @@ export async function signup(signUpData) {
 
 
   revalidatePath('/', 'layout');
-  redirect('/trivia');
+  redirect('/quiniela');
 
 }
   
