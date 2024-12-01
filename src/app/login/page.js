@@ -10,7 +10,6 @@ export default function LoginPage() {
   const [name, setName] = useState('');
   const [lastname, setLastname] = useState('');
   const [phone, setPhone] = useState('');
-  const [password, setPassword] = useState('');
   const [age, setAge] = useState('');
   const [firstAnswers, setFirstAnswers] = useState({});
   const [firstAnswersString, setFirstAnswersString] = useState('');
@@ -29,12 +28,12 @@ export default function LoginPage() {
     {
       id: 1,
       question: '¿Cuáles son los dos peloteros que llegan a la final?',
-      options: ['José Altuve', 'Eugenio Suárez', 'William contreras', 'Renato Nuñez', 'Andrés Chaparro', 'Jackson Chourio', 'Luisangel Acuña', 'Anthony Santander'],
+      options: ['José Altuve', 'Eugenio Suárez', 'William contreras', 'Renato Nuñez', 'Andrés Chaparro', 'Jackson Chourio', 'Luisangel Acuña', 'Moisés Gómez'],
     },
     {
       id: 2,
       question: '¿Quién queda campeón? ',
-      options: ['José Altuve', 'Eugenio Suárez', 'William contreras', 'Renato Nuñez', 'Andrés Chaparro', 'Jackson Chourio', 'Luisangel Acuña', 'Anthony Santander'],
+      options: ['José Altuve', 'Eugenio Suárez', 'William contreras', 'Renato Nuñez', 'Andrés Chaparro', 'Jackson Chourio', 'Luisangel Acuña', 'Moisés Gómez'],
     }
   ];
 
@@ -105,7 +104,9 @@ export default function LoginPage() {
         delete updatedAnswers[name];
         return updatedAnswers;
       }
+      
     });
+    console.log(firstAnswers);
   };
   
 
@@ -127,6 +128,13 @@ export default function LoginPage() {
       }
     });
   }
+
+  const handleKeyDown = (e) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      handleNext(e);
+    }
+  };
 
   return (
     <div className="flex items-center justify-center min-h-screen  p-8 font-[family-name:var(--font-pepsi-owners-2-compressed)] bg-black">
@@ -220,6 +228,7 @@ export default function LoginPage() {
                   required
                   value={email}
                   onChange={(e) => {setEmail(e.target.value); setWarning('')}}
+                  onKeyDown={handleKeyDown}
                   className="px-4 py-2 rounded bg-white bg-opacity-20 text-white placeholder-white placeholder-opacity-50 border border-transparent focus:outline-none focus:ring-2 focus:ring-white"
                   placeholder="Enter your email"
                 />
@@ -251,6 +260,7 @@ export default function LoginPage() {
                   required
                   value={age}
                   onChange={(e) => {setAge(e.target.value); setWarning('')}}
+                  onKeyDown={handleKeyDown}
                   className="px-4 py-2 rounded bg-white bg-opacity-20 text-white placeholder-white placeholder-opacity-50 border border-transparent focus:outline-none focus:ring-2 focus:ring-white"
                   placeholder="Pon tu edad"
                 />
@@ -294,6 +304,7 @@ export default function LoginPage() {
                   required
                   value={name}
                   onChange={(e) => setName(e.target.value)}
+                  onKeyDown={handleKeyDown}
                   className="px-4 py-2 rounded bg-white bg-opacity-20 text-white placeholder-white placeholder-opacity-50 border border-transparent focus:outline-none focus:ring-2 focus:ring-white"
                   placeholder="Enter your name"
                 />
@@ -331,6 +342,7 @@ export default function LoginPage() {
                   required
                   value={lastname}
                   onChange={(e) => {setLastname(e.target.value); setWarning('')}}
+                  onKeyDown={handleKeyDown}
                   className="px-4 py-2 rounded bg-white bg-opacity-20 text-white placeholder-white placeholder-opacity-50 border border-transparent focus:outline-none focus:ring-2 focus:ring-white"
                   placeholder="Enter your lastname"
                 />
@@ -369,6 +381,7 @@ export default function LoginPage() {
                   required
                   value={phone}
                   onChange={(e) => {setPhone(e.target.value); setWarning('')}}
+                  onKeyDown={handleKeyDown}
                   className="px-4 py-2 rounded bg-white bg-opacity-20 text-white placeholder-white placeholder-opacity-50 border border-transparent focus:outline-none focus:ring-2 focus:ring-white"
                   placeholder="Enter your phone"
                 />
@@ -431,6 +444,7 @@ export default function LoginPage() {
                         name={`option-${index}`} // Unique name for each checkbox
                         value={option} // The value of the checkbox (e.g., the label text)
                         onChange={handleFirstAnswersChange} // Update state on change
+                        onKeyDown={handleKeyDown}
                         className="mr-2"
                         checked={firstAnswers[`option-${index}`] || false} // Ensure it reflects the state (defaults to false if not checked)
                       />
@@ -481,6 +495,7 @@ export default function LoginPage() {
                               name={key} // Unique name for each checkbox
                               value={value} // The value of the checkbox (e.g., the label text)
                               onChange={handleSecondAnswersChange} // Update state on change
+                              onKeyDown={handleKeyDown}
                               className="mr-2"
                               checked={secondAnswers[key] || false} // Ensure it reflects the state (defaults to false if not checked)
                             />
@@ -508,9 +523,11 @@ export default function LoginPage() {
                         )}
                       </div>
                     </div>
+                    
               </div>
+              
             </div>
-          )}     
+          )}    
         </form>
       </main>
       }
