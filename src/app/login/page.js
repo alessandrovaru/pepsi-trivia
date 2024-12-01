@@ -1,7 +1,7 @@
 'use client'
 import { useState } from 'react';
 import Image from 'next/image';
-import { login, signup } from './actions';
+import { signup } from './actions';
 import { useRouter } from 'next/navigation';
 
 export default function LoginPage() {
@@ -38,8 +38,12 @@ export default function LoginPage() {
   ];
 
   const handleNext = (e) => {
-    // make first 1,5 and then after 0,5 seconds make it 2
     e.preventDefault();
+    const phoneRegex = /^(58|04|4)\d{9,11}$/; // Updated regex to match numbers starting with 58, 04, or 4
+    if (step === 5 && !phoneRegex.test(phone)) {
+      setWarning('El número de teléfono debe tener el formato. Ejemplo: 0412-1234567');
+      return;
+    }
     if (email) {
       setStep(step + 0.5);
       setTimeout(() => {
@@ -383,7 +387,7 @@ export default function LoginPage() {
                   onChange={(e) => {setPhone(e.target.value); setWarning('')}}
                   onKeyDown={handleKeyDown}
                   className="px-4 py-2 rounded bg-white bg-opacity-20 text-white placeholder-white placeholder-opacity-50 border border-transparent focus:outline-none focus:ring-2 focus:ring-white"
-                  placeholder="Enter your phone"
+                  placeholder="04xx-xxxxxxx"
                 />
               </div>
              
