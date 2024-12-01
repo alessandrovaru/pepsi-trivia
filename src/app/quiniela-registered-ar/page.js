@@ -24,11 +24,18 @@ export default function TriviaPage() {
       <Image
         src={isMobile ? "/images/bg.png" : "/images/bg2.png"}
         alt="Background"
-        layout="fill"
+        fill
         objectFit="cover"
         className="absolute inset-0 z-0 opacity-20"
       />
       <main className="w-full max-w-md p-8 rounded-lg relative overflow-hidden bg-white text-center z-10">
+      <Image  
+          src="/images/logo.png"
+          alt="Overlay Image"
+          width={130}
+          height={130}
+          className="overlayImage"
+        />
         <h1 className="text-black text-lg">
           ¡Predicciones registradas!
         </h1>

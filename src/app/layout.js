@@ -41,7 +41,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body
-        className={`${PepsiOwners2Compressed.variable} ${microgramma.variable} antialiased`}
+        className={`${PepsiOwners2Compressed.variable} antialiased`}
       >
         {children}
         <Footer />

@@ -349,7 +349,7 @@ export default function LoginPage() {
                   onChange={(e) => {setLastname(e.target.value); setWarning('')}}
                   onKeyDown={handleKeyDown}
                   className="px-4 py-2 rounded bg-white bg-opacity-20 text-white placeholder-white placeholder-opacity-50 border border-transparent focus:outline-none focus:ring-2 focus:ring-white"
-                  placeholder="Enter your lastname"
+                  placeholder="Agrega tu apellido" 
                 />
               </div>
               
@@ -388,7 +388,7 @@ export default function LoginPage() {
                   onChange={(e) => {setPhone(e.target.value); setWarning('')}}
                   onKeyDown={handleKeyDown}
                   className="px-4 py-2 rounded bg-white bg-opacity-20 text-white placeholder-white placeholder-opacity-50 border border-transparent focus:outline-none focus:ring-2 focus:ring-white"
-                  placeholder="04xx-xxxxxxx"
+                  placeholder="04xxxxxxxxx"
                 />
               </div>
              
