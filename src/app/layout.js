@@ -33,13 +33,13 @@ const PepsiOwners2Regular = localFont({
 
 
 export const metadata = {
-  title: "Quiniela Pepsi - Festival de Jonrones 22",
+  title: "Festival del Jonrón edición 22",
   description: " ¡Participa en la quiniela de Pepsi y gana premios!",
   openGraph: {
-    title: 'Quiniela Pepsi - Festival de Jonrones 22',
+    title: 'Quiniela Pepsi - Festival del Jonrón edición 22',
     description: '¡Participa en la quiniela de Pepsi y gana premios!',
-    url: 'https://pepsi-trivia.vercel.app/',
-    siteName: 'Quiniela Pepsi - Festival de Jonrones 22',
+    url: 'https://quiniela-jonron-pepsi.vercel.app/',
+    siteName: 'Quiniela Pepsi - Festival del Jonrón edición 22',
     images: [
       {
         url: 'images/bg2.png',
