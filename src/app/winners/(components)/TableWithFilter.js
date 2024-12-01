@@ -1,9 +1,11 @@
 'use client'
 import { useState } from 'react';
 
-export default function TableWithFilter({ data, error }) {
+
+export default function TableWithFilter({ data, error, getUser }) {
   const [selectedAnswers1, setSelectedAnswers1] = useState([]);
   const [selectedAnswers2, setSelectedAnswers2] = useState([]);
+  const [winner, setWinner] = useState(null);
 
   const options = [
     'José Altuve', 'Eugenio Suárez', 'William Contreras', 'Renato Nuñez',
@@ -34,9 +36,7 @@ export default function TableWithFilter({ data, error }) {
   const answer1Filter = selectedAnswers1.join('-');
   const answer2Filter = selectedAnswers2.join('-');
 
-  // ORDENA SIEMPRE DE MENOR A MAYOR 
-  const answer1FilterMayorAMenor = selectedAnswers1.sort((a, b) => a - b).join('-');
-  const answer2FilterMayorAMenor = selectedAnswers2.sort((a, b) => a - b).join('-');
+
 
   const filteredData = data.filter(userAnswer => {
     const matchesAnswer1 = 
@@ -61,7 +61,15 @@ export default function TableWithFilter({ data, error }) {
 
   const generateRandomWinner = () => {
     const winner = displayedData[Math.floor(Math.random() * displayedData.length)];
-    alert(`El ganador es el usuario con ID ${winner.user_id}`);
+
+    getUser(winner.user_id).then(({ data, error }) => {
+      if (error) {
+        console.error(error);
+        return;
+      }
+      setWinner(data[0]);
+    });
+    
   }
 
   return (
@@ -69,24 +77,26 @@ export default function TableWithFilter({ data, error }) {
       <div className="mb-4 font-[family-name:var(--font-pepsi-owners-2-compressed)] text-white" >
         <div className="mb-4">
           <span className="block mb-2 font-semibold text-[3rem]">¿Quién llegó a la final?</span>
-          <div className="flex flex-wrap">
+          <span className="block mb-2 font-semibold text-sm">Tienes que elegir dos finalistas</span>
+          <div className="flex flex-wrap flex-col">
             {optionsWithValues.map(option => (
-              <label key={`q1-${option.value}`} className="mr-4 flex items-center">
-                <input
-                  type="checkbox"
-                  value={option.value}
-                  checked={selectedAnswers1.includes(option.value)}
-                  onChange={() => handleCheckboxChange1(option.value)}
-                  className="mr-1"
-                />
-                {option.label}
-              </label>
+              
+                <label key={`q1-${option.value}`} className="mr-4 flex items-center">
+                  <input
+                    type="checkbox"
+                    value={option.value}
+                    checked={selectedAnswers1.includes(option.value)}
+                    onChange={() => handleCheckboxChange1(option.value)}
+                    className="mr-1"
+                  />
+                  {option.label}
+                </label>
             ))}
           </div>
         </div>
         <div className="mb-4">
           <span className="block mb-2 font-semibold text-[3rem]">¿Quién ganó?</span>
-          <div className="flex flex-wrap">
+          <div className="flex flex-wrap flex-col">
             {optionsWithValues.map(option => (
               <label key={`q2-${option.value}`} className="mr-4 flex items-center">
                 <input
@@ -102,6 +112,7 @@ export default function TableWithFilter({ data, error }) {
           </div>
         </div>
       </div>
+      
       {/* <table className="bg-white text-black border border-gray-200">
         <thead>
           <tr>
@@ -128,9 +139,16 @@ export default function TableWithFilter({ data, error }) {
       </table> */}
 
       {/* add a text where it says how many entries we have, dont count the ones that have the same userid */}
-      <div className="text-white mt-4">
+      <div className="text-white mt-4 font-[family-name:var(--font-pepsi-owners-2-compressed)]">
         <p>{displayedData.length/2} entradas</p>
       </div>
+      {winner && (
+        <div className="text-white mt-4 font-[family-name:var(--font-pepsi-owners-2-compressed)]">
+          <p>El ganador es: {winner.name} {winner.last_name}</p>
+          <p>Con el correo: {winner.email}</p>
+          <p> con  el phone: {winner.phone_number}</p>
+        </div>
+      )}
       <button onClick={() => generateRandomWinner()} className="mt-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">Generar ganador</button>
           </div>
         );

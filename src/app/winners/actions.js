@@ -15,3 +15,17 @@ export async function getUserAnswers() {
   return { data };
 }
 
+export async function getUser(user_id) {
+  const supabase = await createClient();
+  const { data, error } = await supabase
+    .from('users')
+    .select('*')
+    .eq('id', user_id);
+
+  if (error) {
+    return { error };
+  }
+
+  return { data };
+}
+
