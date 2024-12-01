@@ -21,19 +21,19 @@ export default async function Home() {
           <Image
             src="/images/jonron.png"
             alt="Pepsi Pulse Logo"
-            width={400}
-            height={400}
+            width={240}
+            height={240}
           />
           <Image
             src="/images/logo.png"
             alt="Overlay Image"
-            width={130}
-            height={130}
+            width={80}
+            height={80}
             className={styles.overlayImage}
           />
         </Link>
       </div>
-      <h1 className={`${styles.title} font-[family-name:var(--font-pepsi-owners-2-compressed)] text-white font text-[3rem] text-center mt-12`} >TOCA PARA INICIAR LA QUINIELA</h1>
+      <h1 className={`${styles.title} font-[family-name:var(--font-pepsi-owners-2-compressed)] text-white font text-[3rem] text-center mt-12`} >TOCA el logo PARA INICIAR LA QUINIELA</h1>
     </div>
   );
 }

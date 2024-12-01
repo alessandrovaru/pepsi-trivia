@@ -32,8 +32,8 @@ export default function TriviaPage() {
       <Image  
           src="/images/logo.png"
           alt="Overlay Image"
-          width={130}
-          height={130}
+          width={60}
+          height={60}
           className="overlayImage"
         />
         <h1 className="text-black text-lg">
