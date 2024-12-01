@@ -204,7 +204,7 @@ export default function LoginPage() {
       `}</style>
       {loading ? (
         <div className="fixed top-0 left-0 z-50 w-full h-full bg-black bg-opacity-70 flex items-center justify-center">
-          cargando
+          <p className='text-white'>Cargando...</p>
         </div>
       ) : 
       <main className="w-full max-w-mdp-8 rounded-lg relative overflow-hidden bg-black grid grid-row-1 gap-6 p-8">
@@ -301,6 +301,7 @@ export default function LoginPage() {
                 <label htmlFor="name" className="text-white text-lg mb-1">
                   Nombre:
                 </label>
+                <p className="text-white text-sm mb-1 underline">Ingresa solo tu nombre</p>
                 <input
                   id="name"
                   name="name"
