@@ -68,6 +68,12 @@ export default function TriviaPage() {
     //   />
     //   <p className='text-white text-xl'>La quiniela ha terminado</p>
     //   <p className='text-white text-sm'>Pronto revelaremos al ganador</p>
+    //   <p className="text-white text-sm mt-4">
+    //    síguenos en nuestras redes sociales
+    //   </p>
+    //   <a href="https://www.instagram.com/pepsiven/" target="_blank" className="mt-4 flex flex-col text-white items-center justify-center">
+    //    <span className="underline text-white animate-pulse">@pepsiven</span>
+    //   </a>
     // </div>
   );
 }
