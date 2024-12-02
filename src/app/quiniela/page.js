@@ -46,7 +46,7 @@ export default function TriviaPage() {
         </p>
         {/* Agrega un icon de instagram que sea clickeable y que te lleve a su perfil */}
         <p className="text-black text-sm mt-4">
-          o síguenos en nuestras redes sociales
+          síguenos en nuestras redes sociales
         </p>
         <a href="https://www.instagram.com/pepsiven/" target="_blank" className="mt-4 flex flex-col text-black items-center justify-center">
 
