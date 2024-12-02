@@ -44,6 +44,10 @@ export default function LoginPage() {
       setWarning('El número de teléfono debe tener el formato. Ejemplo: 04121234567');
       return;
     }
+    if (step === 1 && !email.includes('@')) {
+      setWarning('Por favor ingresa un correo electrónico válido');
+      return;
+    }
     if (email) {
       setStep(step + 0.5);
       setTimeout(() => {
