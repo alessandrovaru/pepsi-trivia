@@ -56,5 +56,18 @@ export default function TriviaPage() {
         </a>
       </main>
     </div>
+    // agrega un view que saga cuando ya la quinierla haya terminado
+
+    // <div className="flex items-center justify-center h-[96vh] flex-col p-8 font-[family-name:var(--font-pepsi-owners-2-compressed)] bg-black">
+    //   <Image
+    //     src="/images/logo.png"
+    //     alt="Logo"
+    //     width={200}
+    //     height={200}
+    //     className="mx-auto h-20 w-20 mb-4"
+    //   />
+    //   <p className='text-white text-xl'>La quiniela ha terminado</p>
+    //   <p className='text-white text-sm'>Pronto revelaremos al ganador</p>
+    // </div>
   );
 }
