@@ -28,8 +28,8 @@ export default async function Home() {
           <Image
             src="/images/logo.png"
             alt="Overlay Image"
-            width={80}
-            height={80}
+            width={200}
+            height={200}
             className={styles.overlayImage}
           />
         </Link>

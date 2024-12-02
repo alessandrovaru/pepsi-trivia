@@ -3,6 +3,9 @@
 import Image from "next/image";
 import { useEffect, useState } from "react";
 
+import styles from '../Home.module.css'; // Import the CSS module
+
+
 export default function TriviaPage() {
   const [isMobile, setIsMobile] = useState(false);
 
@@ -32,9 +35,9 @@ export default function TriviaPage() {
       <Image  
           src="/images/logo.png"
           alt="Overlay Image"
-          width={60}
-          height={60}
-          className="overlayImage"
+          width={200}
+          height={200}
+          className={`${styles.pulseScale}`}
         />
         <h1 className="text-black text-2xl">
           ¡Predicciones registradas!
