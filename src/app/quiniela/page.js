@@ -36,7 +36,7 @@ export default function TriviaPage() {
           height={60}
           className="overlayImage"
         />
-        <h1 className="text-black text-lg">
+        <h1 className="text-black text-2xl">
           ¡Predicciones registradas!
         </h1>
         <p className="text-black text-sm">

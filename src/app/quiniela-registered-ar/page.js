@@ -28,7 +28,7 @@ export default function TriviaPage() {
         objectFit="cover"
         className="absolute inset-0 z-0 opacity-20"
       />
-      <main className="w-full max-w-md p-8 rounded-lg relative overflow-hidden bg-white text-center z-10">
+      <main className="w-full max-w-md p-8 rounded-lg relative overflow-hidden bg-white text-center z-10 flex flex-col items-center">
       <Image  
           src="/images/logo.png"
           alt="Overlay Image"
@@ -36,7 +36,7 @@ export default function TriviaPage() {
           height={60}
           className="overlayImage"
         />
-        <h1 className="text-black text-lg">
+        <h1 className="text-black text-2xl">
           ¡Predicciones registradas!
         </h1>
         <p className="text-black text-sm">Ya habías dejado una predicción.</p>
