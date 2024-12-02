@@ -225,7 +225,7 @@ export default function LoginPage() {
           {(step === 1 || step === 1.5) && (
             <div className={`step step-1`}>
               <div className="flex flex-col">
-                <label htmlFor="email" className="text-white text-lg mb-1">
+                <label htmlFor="email" className="text-white text-3xl mb-1">
                   Correo Electrónico:
                 </label>
                 <p className="text-white text-sm mb-1">Ingresa un correo electrónico válido, te contáctaremos si ganas.</p>
@@ -258,7 +258,7 @@ export default function LoginPage() {
           {(step === 2 || step === 2.5) && (
             <div className={`step step-2`}>
               <div className="flex flex-col">
-                <label htmlFor="age" className="text-white text-sm mb-1">
+                <label htmlFor="age" className="text-white text-3xl mb-1">
                   Edad:
                 </label>
                 <input
@@ -302,10 +302,10 @@ export default function LoginPage() {
           {(step === 3 || step === 3.5) && (
             <div className={`step step-3`}>
               <div className="flex flex-col">
-                <label htmlFor="name" className="text-white text-lg mb-1">
+                <label htmlFor="name" className="text-white text-3xl mb-1">
                   Nombre:
                 </label>
-                <p className="text-white text-sm mb-1 underline">Ingresa solo tu nombre</p>
+                <p className="text-whitexl mb-1 underline">Ingresa solo tu nombre</p>
                 <input
                   id="name"
                   name="name"
@@ -341,7 +341,7 @@ export default function LoginPage() {
           {(step === 4 || step === 4.5) && (
             <div className={`step step-4`}>
               <div className="flex flex-col">
-                <label htmlFor="lastname" className="text-white text-lg mb-1">
+                <label htmlFor="lastname" className="text-white text-3xl mb-1">
                   Apellido:
                 </label>
                 <input
@@ -379,7 +379,7 @@ export default function LoginPage() {
           {(step === 5 || step === 5.5) && (
             <div className={`step step-5`}>
               <div className="flex flex-col">
-                <label htmlFor="phone" className="text-white text-lg mb-1">
+                <label htmlFor="phone" className="text-white text-3xl mb-1">
                   Número de teléfono:
                 </label>
                 <p className="text-white text-sm mb-1">Ingresa un número de teléfono válido, te contáctaremos si ganas.</p>
@@ -418,7 +418,7 @@ export default function LoginPage() {
           {(step === 6  || step === 6.5) && (
             <div className={`step step-6`}>
               <div className="flex flex-col">
-                <h2 className="text-white text-[1.5rem] mb-4 text-center">¡Haz tus predicciones!</h2>
+                <h2 className="text-white text-3xl mb-4 text-center">¡Haz tus predicciones!</h2>
                 <div className="flex flex-row justify-between gap-4 pt-4">
                   <button
                       type="button"
@@ -444,7 +444,7 @@ export default function LoginPage() {
               <div className="flex flex-col">
                 <div className="flex flex-col">
                   {/* Add checkboxes with different options */}
-                  <h2 className="text-white text-[1.5rem] mb-4 ">{questions.find(q => q.id === 1).question}</h2>
+                  <h2 className="text-white text-3xl mb-4 ">{questions.find(q => q.id === 1).question}</h2>
                   <p className="text-white text-sm mb-3 underline">Selecciona los dos peloteros que crees que llegarán a la final</p>
                   {questions.find(q => q.id === 1).options.map((option, index) => (
                     <label key={index} className="text-white mb-2">
@@ -495,7 +495,7 @@ export default function LoginPage() {
               <div className="flex flex-col">
                 <div className="flex flex-col">
                       {/* add check boxes with different options */}
-                      <h2 className="text-white text-[1.5rem] mb-4 ">{questions.find(q => q.id === 2).question}</h2>
+                      <h2 className="text-white text-3xl mb-4 ">{questions.find(q => q.id === 2).question}</h2>
                       {Object.entries(firstAnswers).map(([key, value]) => (
 
                            <label key={key} className="text-white mb-2">
@@ -552,7 +552,7 @@ export default function LoginPage() {
     //     height={200}
     //     className="mx-auto h-20 w-20 mb-4"
     //   />
-    //   <p className='text-white text-xl'>La quiniela ha terminado</p>
+    //   <p className='text-white text-3xl'>La quiniela ha terminado</p>
     //   <p className='text-white text-sm'>Pronto revelaremos al ganador</p>
     // </div>
   );

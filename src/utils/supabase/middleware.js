@@ -32,7 +32,7 @@ export async function updateSession(request) {
     data: { user },
   } = await supabase.auth.getUser()
 
-  if (!user && !request.nextUrl.pathname.startsWith('/login') && !request.nextUrl.pathname.startsWith('/auth') && request.nextUrl.pathname !== '/' ) {
+  if (!user && !request.nextUrl.pathname.startsWith('/login') && !request.nextUrl.pathname.startsWith('/auth') && request.nextUrl.pathname !== '/' && request.nextUrl.pathname !== '/quiniela-registered-ar') {
     // No user, redirect to login page
     const url = request.nextUrl.clone()
     url.pathname = '/login'
