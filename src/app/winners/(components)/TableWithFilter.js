@@ -9,7 +9,7 @@ export default function TableWithFilter({ data, error, getUser }) {
 
   const options = [
     'José Altuve', 'Eugenio Suárez', 'William Contreras', 'Renato Nuñez',
-    'Andrés Chaparro', 'Jackson Chourio', 'Luisangel Acuña', 'Anthony Santander'
+    'Andrés Chaparro', 'Jackson Chourio', 'Luisangel Acuña', 'Moisés Gómez'
   ];
 
   // Asignar un valor numérico a cada opción
