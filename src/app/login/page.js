@@ -84,7 +84,7 @@ export default function LoginPage() {
       
       setLoading(false);
       router.push("/quiniela-registered-ar");
-      setWarning("Ya te registraste con estos datos. Pronto revelaremos a los ganadores"); 
+      setWarning("Ya te registraste con estos datos. Pronto revelaremos al ganador"); 
       
     } else {
       setLoading(false);
