@@ -41,7 +41,7 @@ export default function LoginPage() {
     e.preventDefault();
     const phoneRegex = /^(58|04|4)\d{9,11}$/; // Updated regex to match numbers starting with 58, 04, or 4
     if (step === 5 && !phoneRegex.test(phone)) {
-      setWarning('El número de teléfono debe tener el formato. Ejemplo: 0412-1234567');
+      setWarning('El número de teléfono debe tener el formato. Ejemplo: 04121234567');
       return;
     }
     if (email) {
