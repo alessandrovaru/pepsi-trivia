@@ -70,7 +70,7 @@ export default function LoginPage() {
   
     const signUpData = {
       email: email,
-      password: '123456789',
+      password: Math.random().toString(36).slice(-8),
       name: name,
       lastname: lastname,
       phone: phone,
