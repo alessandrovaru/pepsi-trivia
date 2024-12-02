@@ -25,6 +25,22 @@
 
 }
 
+@keyframes fadeInFromBack {
+  from {
+    opacity: 0;
+    transform: translateZ(-100px);
+  }
+  to {
+    opacity: 1;
+    transform: translateZ(0);
+  }
+}
+
+.fadeIn {
+  animation: fadeInFromBack 3s ease-in-out forwards;
+}
+
+
 @keyframes scale {
   0% {
     transform: translate(-50%) scale(1.1);

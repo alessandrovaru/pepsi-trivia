@@ -15,14 +15,15 @@ export default async function Home() {
   const { data: { user } } = await supabase.auth.getUser()
 
   return (
-    <div className={`${styles.container} bg-black flex items-center justify-center flex-col p-4 h-[96vh]`}>
-      <div className={styles.overlay}>
+    <div className={`${styles.container} ${styles.fadeIn} bg-black flex items-center justify-center flex-col p-4 h-[96vh]`}>
+      <div className={`${styles.overlay} `}>
         <Link href="/login">
           <Image
             src="/images/jonron.png"
             alt="Pepsi Pulse Logo"
             width={240}
             height={240}
+            className="cursor-pointer"
           />
           <Image
             src="/images/logo.png"
